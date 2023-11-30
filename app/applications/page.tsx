@@ -1,3 +1,3 @@
 export default function ApplicationsPage() {
-  return <div>page</div>;
+	return <div>page</div>;
 }
