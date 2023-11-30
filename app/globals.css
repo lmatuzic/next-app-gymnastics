@@ -4,8 +4,56 @@
 
 @layer base {
 	:root {
+		/* custom colors from Figma */
+
+		/* BASIC */
+		--primary: 349, 100%, 58%;
+		--primary-dark: 349, 92%, 42%;
+		--primary-variant-judge: 25, 100%, 58%;
+		--secondary: 249, 9%, 85%;
+		--tertiary-dark: 246, 8%, 45%;
+		--disabled: 251, 8%, 59%;
+
+		/* BACKGROUND */
+		--bg-primary: 0, 0%, 96%;
+		--bg-primary-dark: 223, 30%, 5%;
+		--bg-secondary: 240, 5%, 93%;
+		--bg-secondary-dark: 230, 21%, 17%;
+		--bg-secondary-medium: 246, 9%, 79%;
+		--bg-secondary-ios: 240, 7%, 94%;
+		--bg-tertiary-dark: 248, 18%, 25%;
+
+		/* UTILITIES */
+		--alert: 349, 83%, 51%;
+		--success: 108, 100%, 38%;
+		--online: 108, 79%, 49%;
+		--warning: 43, 100%, 50%;
+		--user-avatar: 191, 77%, 75%;
+
+		/* HIGHLIGHTS */
+		--bg-upload: 108, 75%, 87%;
+		--bg-success: 107, 83%, 95%;
+		--bg-error: 348, 100%, 96%;
+		--bg-me: 228, 21%, 9%;
+		--bg-widgets: 228, 21%, 9%;
+
+		/* TEXT COLORS */
+		--text-primary: 223, 30%, 5%;
+		--text-primary-light: 248, 18%, 25%;
+		--text-secondary: 227, 4%, 46%;
+		--text-secondary-light: 240, 4%, 71%;
+		--text-disabled: 0, 0%, 79%;
+
+		/* DIVIDERS */
+		--divider-dark: 248, 18%, 25%;
+		--divider-medium: 249, 9%, 85%;
+
+		/* ------------------------- */
+
 		--background: 0 0% 100%;
 		--foreground: 222.2 84% 4.9%;
+
+		--primary-foreground: 210 40% 98%;
 
 		--card: 0 0% 100%;
 		--card-foreground: 222.2 84% 4.9%;
@@ -13,10 +61,6 @@
 		--popover: 0 0% 100%;
 		--popover-foreground: 222.2 84% 4.9%;
 
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
-
-		--secondary: 210 40% 96.1%;
 		--secondary-foreground: 222.2 47.4% 11.2%;
 
 		--muted: 210 40% 96.1%;

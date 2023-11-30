@@ -26,9 +26,93 @@ module.exports = {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
 				},
+				primaryDark: {
+					DEFAULT: 'hsl(var(--primary-dark))',
+				},
+				primaryVariantJudge: {
+					DEFAULT: 'hsl(var(--primary-variant-judge))',
+				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))',
+				},
+				tertiaryDark: {
+					DEFAULT: 'hsl(var(--tertiary-dark))',
+				},
+				disabled: {
+					DEFAULT: 'hsl(var(--disabled))',
+				},
+				bgPrimary: {
+					DEFAULT: 'hsl(var(--bg-primary))',
+				},
+				bgPrimaryDark: {
+					DEFAULT: 'hsl(var(--bg-primary-dark))',
+				},
+				bgSecondary: {
+					DEFAULT: 'hsl(var(--bg-secondary))',
+				},
+				bgSecondaryDark: {
+					DEFAULT: 'hsl(var(--bg-secondary-dark))',
+				},
+				bgSecondaryMedium: {
+					DEFAULT: 'hsl(var(--bg-secondary-medium))',
+				},
+				bgSecondaryIos: {
+					DEFAULT: 'hsl(var(--bg-secondary-ios))',
+				},
+				bgTertiaryDark: {
+					DEFAULT: 'hsl(var(--bg-tertiary-dark))',
+				},
+				alert: {
+					DEFAULT: 'hsl(var(--alert))',
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+				},
+				online: {
+					DEFAULT: 'hsl(var(--online))',
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+				},
+				userAvatar: {
+					DEFAULT: 'hsl(var(--user-avatar))',
+				},
+				bgUpload: {
+					DEFAULT: 'hsl(var(--bg-upload))',
+				},
+				bgSuccess: {
+					DEFAULT: 'hsl(var(--bg-success))',
+				},
+				bgError: {
+					DEFAULT: 'hsl(var(--bg-error))',
+				},
+				bgMe: {
+					DEFAULT: 'hsl(var(--bg-me))',
+				},
+				bgWidgets: {
+					DEFAULT: 'hsl(var(--bg-widgets))',
+				},
+				textPrimary: {
+					DEFAULT: 'hsl(var(--text-primary))',
+				},
+				textPrimaryLight: {
+					DEFAULT: 'hsl(var(--text-primary-light))',
+				},
+				textSecondary: {
+					DEFAULT: 'hsl(var(--text-secondary))',
+				},
+				textSecondaryLight: {
+					DEFAULT: 'hsl(var(--text-secondary-light))',
+				},
+				textDisabled: {
+					DEFAULT: 'hsl(var(--text-secondary-disabled))',
+				},
+				dividerDark: {
+					DEFAULT: 'hsl(var(--divider-dark))',
+				},
+				dividerMedium: {
+					DEFAULT: 'hsl(var(--divider-medium))',
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -50,6 +134,9 @@ module.exports = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))',
 				},
+			},
+			testRed: {
+				DEFAULT: '#FF2B51',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
