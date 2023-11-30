@@ -1,9 +1,9 @@
 import H1 from '@/app/components/headings/H1';
 
-export default function Home() {
+export default function ApplicationsPage() {
 	return (
 		<div>
-			<H1 text='Home page' />
+			<H1 text='Application page' />
 		</div>
 	);
 }
