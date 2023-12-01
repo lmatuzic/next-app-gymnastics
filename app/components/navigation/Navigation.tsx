@@ -1,10 +1,10 @@
 import logo from '@/app/assets/logo/logo.svg';
 import H3 from '@/app/components/headings/H3';
-import { HOME_PAGE, routes } from '@/app/contants/routes';
+import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/shadcn/Avatar';
+import { HOME_PAGE } from '@/app/contants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import MobileNavigation from './MobileNavigation';
-import NavLink from './NavLink';
 
 export default async function Navigation() {
 	return (
@@ -15,20 +15,29 @@ export default async function Navigation() {
 						<Image src={logo} width={32} height={32} alt='Gymnastics app logo' className='mr-4' />
 					</Link>
 
-					<div className='hidden sm:flex items-center'>
+					<div className='items-center hidden sm:flex'>
 						<H3 text='Competition name' />
 						<span className='mx-1'>&#183;</span>
 						<span className=''>Date</span>
 					</div>
 				</div>
 
-				<ul className='flex justify-between w-full sm:w-auto sm:items-center'>
+				<div className='flex items-center gap-4'>
+					<Avatar>
+						<AvatarImage src='/avatar.png' alt='avatar' />
+						<AvatarFallback>You</AvatarFallback>
+					</Avatar>
+
+					<span>Nikola Kavezić</span>
+				</div>
+
+				{/* <ul className='flex justify-between w-full sm:w-auto sm:items-center'>
 					{routes.map((route) => (
 						<li key={route.path} className='hidden mr-6 sm:flex'>
 							<NavLink route={route} />
 						</li>
 					))}
-				</ul>
+				</ul> */}
 
 				<MobileNavigation />
 			</div>
