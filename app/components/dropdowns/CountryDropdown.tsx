@@ -10,7 +10,7 @@ import {
 } from '@/app/components/shadcn/Select';
 import { CountryDropdownProps } from '@/app/typings/countries';
 
-export function CountrySelect({ countries }: CountryDropdownProps) {
+export function CountryDropdown({ countries }: CountryDropdownProps) {
 	return (
 		<Select>
 			<SelectTrigger className='w-[200px]'>

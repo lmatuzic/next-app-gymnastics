@@ -1,5 +1,7 @@
-import { CountrySelect } from '@/app/components/dropdowns/CountrySelect';
+import Badge from '@/app/components/Badge';
+import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
 import H1 from '@/app/components/headings/H1';
+import { Button } from '@/app/components/shadcn/Button';
 
 async function getCountries() {
 	const res = await fetch('https://elevien-fe-job.free.beeceptor.com/countries');
@@ -16,9 +18,20 @@ export default async function Page() {
 
 	return (
 		<div>
-			<H1 text='Home page' />
+			<header className='flex items-center justify-between pb-8 mb-12 border-b border-solid border-bgSecondaryMedium'>
+				<H1 text='My Applications' />
 
-			<CountrySelect countries={countries} />
+				<div className='flex items-center gap-4'>
+					<Button>New application</Button>
+
+					<div className='flex items-center gap-2 px-4 py-2.5 rounded bg-bgSecondary'>
+						<Badge color='green' />
+						<span className='text-sm font-bold'>Open</span>
+					</div>
+				</div>
+			</header>
+
+			<CountryDropdown countries={countries} />
 		</div>
 	);
 }
