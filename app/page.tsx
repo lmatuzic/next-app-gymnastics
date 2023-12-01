@@ -1,11 +1,10 @@
 import Badge from '@/app/components/Badge';
-import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
+import ApplyGymnastForm from '@/app/components/forms/ApplyGymnastForm';
 import H1 from '@/app/components/headings/H1';
 import { Button } from '@/app/components/shadcn/Button';
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -38,11 +37,7 @@ export default async function Page() {
 						<DialogContent>
 							<DialogHeader>
 								<DialogTitle>Apply gymnast</DialogTitle>
-
-								<DialogDescription>
-									This action cannot be undone. This will permanently delete your account and remove
-									your data from our servers.
-								</DialogDescription>
+								<ApplyGymnastForm countries={countries} />
 							</DialogHeader>
 						</DialogContent>
 					</Dialog>
@@ -53,8 +48,6 @@ export default async function Page() {
 					</div>
 				</div>
 			</header>
-
-			<CountryDropdown countries={countries} />
 		</div>
 	);
 }
