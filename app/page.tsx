@@ -20,6 +20,16 @@ async function getCountries() {
 	return res.json();
 }
 
+async function getApplications() {
+	const res = await fetch('https://elevien-fe-job.free.beeceptor.com/countries');
+
+	if (!res.ok) {
+		throw new Error('Failed to fetch data');
+	}
+
+	return res.json();
+}
+
 export default async function Page() {
 	const countries = await getCountries();
 

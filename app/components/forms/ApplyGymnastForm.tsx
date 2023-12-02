@@ -1,6 +1,7 @@
 'use client';
 
 import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
+import ProgramDropdown from '@/app/components/dropdowns/ProgramDropdown';
 import { Button } from '@/app/components/shadcn/Button';
 import {
 	Form,
@@ -11,6 +12,7 @@ import {
 	FormMessage,
 } from '@/app/components/shadcn/Form';
 import { Input } from '@/app/components/shadcn/Input';
+import { programs } from '@/app/contants/applications';
 import { Country } from '@/app/typings/countries';
 import { formSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -27,7 +29,9 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 		defaultValues: {
 			firstName: '',
 			lastName: '',
-			country: '',
+			country: {
+				code: '',
+			},
 			programAndCategory: '',
 		},
 	});
@@ -45,8 +49,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						name='firstName'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>First name</FormLabel>
-
+								<FormLabel className='text-xs'>First name</FormLabel>
 								<FormControl>
 									<Input placeholder='First name' {...field} />
 								</FormControl>
@@ -60,7 +63,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						name='lastName'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Last name</FormLabel>
+								<FormLabel className='text-xs'>Last name</FormLabel>
 								<FormControl>
 									<Input placeholder='Last name' {...field} />
 								</FormControl>
@@ -72,11 +75,27 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 					<FormField
 						control={form.control}
 						name='country'
-						render={({ field }) => (
+						render={() => (
 							<FormItem>
-								<FormLabel>Country</FormLabel>
+								<FormLabel className='text-xs'>Country</FormLabel>
 								<FormControl>
 									<CountryDropdown countries={countries} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</div>
+
+				<div className='flex items-center'>
+					<FormField
+						control={form.control}
+						name='country'
+						render={() => (
+							<FormItem>
+								<FormLabel className='text-xs'>Program and category</FormLabel>
+								<FormControl>
+									<ProgramDropdown programs={programs} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
