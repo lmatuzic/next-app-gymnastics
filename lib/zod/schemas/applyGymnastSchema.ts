@@ -4,7 +4,11 @@ export const applicationSchema = z.object({
 	firstName: z.string().min(2).max(50),
 	lastName: z.string().min(2).max(50),
 	country: z.object({
-		code: z.string().min(2),
+		code: z
+			.string({
+				required_error: 'Please select country.',
+			})
+			.min(2),
 	}),
 	programAndCategory: z.string().min(1),
 	dateOfBirth: z.date({

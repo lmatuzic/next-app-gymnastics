@@ -1,3 +1,5 @@
+import { DataTable } from '@/app/(routes)/applications/components/DataTable/DataTable';
+import { columns } from '@/app/(routes)/applications/components/DataTable/columns';
 import Badge from '@/app/components/Badge';
 import ApplyGymnastForm from '@/app/components/forms/ApplyGymnastForm';
 import H1 from '@/app/components/headings/H1';
@@ -21,7 +23,7 @@ async function getCountries() {
 }
 
 async function getApplications() {
-	const res = await fetch('https://elevien-fe-job.free.beeceptor.com/countries');
+	const res = await fetch('https://elevien-fe-job.free.beeceptor.com/applications');
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
@@ -32,6 +34,7 @@ async function getApplications() {
 
 export default async function Page() {
 	const countries = await getCountries();
+	const applications = await getApplications();
 
 	return (
 		<div>
@@ -59,6 +62,8 @@ export default async function Page() {
 					</div>
 				</div>
 			</header>
+
+			<DataTable columns={columns} data={applications} />
 		</div>
 	);
 }

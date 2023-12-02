@@ -8,7 +8,7 @@ import MobileNavigation from './MobileNavigation';
 
 export default async function Navigation() {
 	return (
-		<nav className='w-full'>
+		<nav className='w-full shadow-[0_4px_4px_0px_rgba(0,0,0,0.08)]'>
 			<div className='container flex items-center justify-between py-4'>
 				<div className='flex items-center'>
 					<Link href={HOME_PAGE}>
@@ -18,17 +18,17 @@ export default async function Navigation() {
 					<div className='items-center hidden sm:flex'>
 						<H3 text='Competition name' />
 						<span className='mx-1'>&#183;</span>
-						<span className=''>Date</span>
+						<span className='font-light text-textSecondary'>Date</span>
 					</div>
 				</div>
 
-				<div className='flex items-center gap-4'>
+				<div className='flex items-center gap-2'>
 					<Avatar>
 						<AvatarImage src='/avatar.png' alt='avatar' />
 						<AvatarFallback>You</AvatarFallback>
 					</Avatar>
 
-					<span>Nikola Kavezić</span>
+					<span className='text-sm'>Nikola Kavezić</span>
 				</div>
 
 				{/* <ul className='flex justify-between w-full sm:w-auto sm:items-center'>
