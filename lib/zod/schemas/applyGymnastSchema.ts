@@ -7,4 +7,8 @@ export const formSchema = z.object({
 		code: z.string().min(2),
 	}),
 	programAndCategory: z.string().min(1),
+	dateOfBirth: z.date({
+		required_error: 'Please select a date and time',
+		invalid_type_error: "That's not a date!",
+	}),
 });

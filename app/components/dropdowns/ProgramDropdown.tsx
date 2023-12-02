@@ -17,7 +17,7 @@ export type ProgramDropdownProps = {
 export default function ProgramDropdown({ programs }: ProgramDropdownProps) {
 	return (
 		<Select>
-			<SelectTrigger className='w-[150px]'>
+			<SelectTrigger className='w-full'>
 				<SelectValue placeholder='Select program' />
 			</SelectTrigger>
 

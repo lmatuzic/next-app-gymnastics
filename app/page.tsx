@@ -1,4 +1,5 @@
 import Badge from '@/app/components/Badge';
+import { DatePicker } from '@/app/components/dropdowns/DatePicker';
 import ApplyGymnastForm from '@/app/components/forms/ApplyGymnastForm';
 import H1 from '@/app/components/headings/H1';
 import { Button } from '@/app/components/shadcn/Button';
@@ -46,9 +47,10 @@ export default async function Page() {
 
 						<DialogContent>
 							<DialogHeader>
-								<DialogTitle>Apply gymnast</DialogTitle>
-								<ApplyGymnastForm countries={countries} />
+								<DialogTitle className='mb-8'>Apply gymnast</DialogTitle>
 							</DialogHeader>
+
+							<ApplyGymnastForm countries={countries} />
 						</DialogContent>
 					</Dialog>
 
@@ -58,6 +60,8 @@ export default async function Page() {
 					</div>
 				</div>
 			</header>
+
+			<DatePicker />
 		</div>
 	);
 }

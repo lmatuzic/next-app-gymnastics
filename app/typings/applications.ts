@@ -9,9 +9,9 @@ export type Application = {
 	categoryName: string;
 	teamName: string;
 	status: string;
-	date: Date | string;
+	date: Date;
 	club: string;
-	dateOfBirth: Date | string;
+	dateOfBirth: Date;
 };
 
 export type Program = {

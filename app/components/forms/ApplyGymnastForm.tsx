@@ -1,8 +1,11 @@
 'use client';
 
+import CalendarDropdown from '@/app/components/dropdowns/CalendarDropdown';
 import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
+import { DatePicker } from '@/app/components/dropdowns/DatePicker';
 import ProgramDropdown from '@/app/components/dropdowns/ProgramDropdown';
 import { Button } from '@/app/components/shadcn/Button';
+import { DialogClose } from '@/app/components/shadcn/Dialog';
 import {
 	Form,
 	FormControl,
@@ -33,6 +36,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 				code: '',
 			},
 			programAndCategory: '',
+			dateOfBirth: new Date(),
 		},
 	});
 
@@ -43,7 +47,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-				<div className='flex items-center gap-4'>
+				<div className='flex items-baseline gap-4'>
 					<FormField
 						control={form.control}
 						name='firstName'
@@ -87,12 +91,12 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 					/>
 				</div>
 
-				<div className='flex items-center'>
+				<div className='flex items-baseline gap-4'>
 					<FormField
 						control={form.control}
 						name='country'
 						render={() => (
-							<FormItem>
+							<FormItem className='w-full'>
 								<FormLabel className='text-xs'>Program and category</FormLabel>
 								<FormControl>
 									<ProgramDropdown programs={programs} />
@@ -101,9 +105,31 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 							</FormItem>
 						)}
 					/>
+
+					<FormField
+						control={form.control}
+						name='dateOfBirth'
+						render={() => (
+							<FormItem className='w-full'>
+								<FormLabel className='text-xs'>Date of birth</FormLabel>
+								<FormControl>
+									<DatePicker />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 				</div>
 
-				<Button type='submit'>Submit</Button>
+				<div className='flex items-center justify-end pt-4 border-t border-solid border-bgSecondaryMedium'>
+					<DialogClose asChild>
+						<Button variant='link' className='font-normal text-black'>
+							Cancel
+						</Button>
+					</DialogClose>
+
+					<Button type='submit'>Save</Button>
+				</div>
 			</form>
 		</Form>
 	);
