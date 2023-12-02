@@ -1,4 +1,4 @@
-export type Application = {
+export type GymnastApplication = {
 	id: string;
 	firstName: string;
 	lastName: string;
@@ -8,7 +8,7 @@ export type Application = {
 	programName: string;
 	categoryName: string;
 	teamName: string;
-	status: string;
+	status: 'applied' | 'declined' | 'canceled' | 'awaiting response';
 	date: Date;
 	club: string;
 	dateOfBirth: Date;

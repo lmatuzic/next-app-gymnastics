@@ -1,25 +1,9 @@
 'use client';
 
-import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
-import { addHours, format, parseISO } from 'date-fns';
-import { date } from 'zod';
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type GymnastApplication = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	country: string;
-	phone: string;
-	programName: string;
-	categoryName: string;
-	teamName: string;
-	status: 'applied' | 'declined' | 'canceled' | 'awaiting response';
-	date: string;
-	club: string;
-	dateOfBirth: Date;
-};
+import StatusIndicator from '@/app/components/StatusIndicator';
+import { GymnastApplication } from '@/app/typings/applications';
+import { ColumnDef } from '@tanstack/react-table';
+import { format } from 'date-fns';
 
 export const columns: ColumnDef<GymnastApplication>[] = [
 	{
@@ -27,8 +11,15 @@ export const columns: ColumnDef<GymnastApplication>[] = [
 		header: 'Name',
 		cell: ({ row }) => (
 			<>
-				<span className='mr-1'>{row.original.firstName}</span>
-				<span>{row.original.lastName}</span>
+				<div>
+					<span className='mr-1'>{row.original.firstName}</span>
+					<span>{row.original.lastName}</span>
+				</div>
+
+				<div>
+					<span className='mr-1'>{row.original.country}</span>
+					<span>{row.original.club}</span>
+				</div>
 			</>
 		),
 	},
@@ -54,14 +45,14 @@ export const columns: ColumnDef<GymnastApplication>[] = [
 	{
 		accessorKey: 'status',
 		header: 'Status',
-		cell: ({ row }) => <span>{row.original.status}</span>,
+		cell: ({ row }) => <StatusIndicator text={row.original.status} />,
 	},
 	{
 		accessorKey: 'date',
 		header: 'Date',
 		cell: ({ row }) => {
 			const date = new Date(row.original.date);
-			const formattedDate = format(date, 'MM.dd.yyyy HH:mm');
+			const formattedDate = format(date, 'MM.dd.yyyy. HH:mm');
 
 			return <span>{formattedDate}</span>;
 		},

@@ -8,7 +8,15 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/app/components/shadcn/Table';
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+	ColumnDef,
+	ExpandedState,
+	flexRender,
+	getCoreRowModel,
+	getExpandedRowModel,
+	useReactTable,
+} from '@tanstack/react-table';
+import { useState } from 'react';
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -16,10 +24,18 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+	const [expanded, setExpanded] = useState<ExpandedState>({});
+
 	const table = useReactTable({
 		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
+		getSubRows: (row) => row.subRows,
+		state: {
+			expanded,
+		},
+		onExpandedChange: setExpanded,
+		getExpandedRowModel: getExpandedRowModel(),
 	});
 
 	return (
@@ -41,15 +57,17 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
 				<TableBody>
 					{table.getRowModel().rows?.length ? (
-						table.getRowModel().rows.map((row) => (
-							<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id}>
-										{flexRender(cell.column.columnDef.cell, cell.getContext())}
-									</TableCell>
-								))}
-							</TableRow>
-						))
+						table.getRowModel().rows.map((row) => {
+							return (
+								<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+									{row.getVisibleCells().map((cell) => (
+										<TableCell key={cell.id}>
+											{flexRender(cell.column.columnDef.cell, cell.getContext())}
+										</TableCell>
+									))}
+								</TableRow>
+							);
+						})
 					) : (
 						<TableRow>
 							<TableCell colSpan={columns.length} className='h-24 text-center'>
