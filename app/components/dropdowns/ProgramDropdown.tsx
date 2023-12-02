@@ -8,13 +8,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/app/components/shadcn/Select';
-import { Program } from '@/app/typings/applications';
+import { Category, Program } from '@/app/typings/applications';
 
 export type ProgramDropdownProps = {
 	programs: Program[];
+	categories: Category[];
 };
 
-export default function ProgramDropdown({ programs }: ProgramDropdownProps) {
+export default function ProgramDropdown({ programs, categories }: ProgramDropdownProps) {
 	return (
 		<Select>
 			<SelectTrigger className='w-full'>

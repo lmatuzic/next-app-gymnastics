@@ -1,6 +1,5 @@
 'use client';
 
-import CalendarDropdown from '@/app/components/dropdowns/CalendarDropdown';
 import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
 import { DatePicker } from '@/app/components/dropdowns/DatePicker';
 import ProgramDropdown from '@/app/components/dropdowns/ProgramDropdown';
@@ -15,9 +14,9 @@ import {
 	FormMessage,
 } from '@/app/components/shadcn/Form';
 import { Input } from '@/app/components/shadcn/Input';
-import { programs } from '@/app/contants/applications';
+import { categories, programs } from '@/app/contants/applications';
 import { Country } from '@/app/typings/countries';
-import { formSchema } from '@/lib/zod/schemas/applyGymnastSchema';
+import { applicationSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -27,8 +26,8 @@ type ApplyGymnastForm = {
 };
 
 export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof applicationSchema>>({
+		resolver: zodResolver(applicationSchema),
 		defaultValues: {
 			firstName: '',
 			lastName: '',
@@ -37,10 +36,13 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 			},
 			programAndCategory: '',
 			dateOfBirth: new Date(),
+			club: '',
+			team: '',
+			phone: '',
 		},
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
+	const onSubmit = (values: z.infer<typeof applicationSchema>) => {
 		console.log(values);
 	};
 
@@ -99,7 +101,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 							<FormItem className='w-full'>
 								<FormLabel className='text-xs'>Program and category</FormLabel>
 								<FormControl>
-									<ProgramDropdown programs={programs} />
+									<ProgramDropdown programs={programs} categories={categories} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -120,6 +122,50 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						)}
 					/>
 				</div>
+
+				<div className='flex items-center gap-4'>
+					<FormField
+						control={form.control}
+						name='club'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className='text-xs'>Club (optional)</FormLabel>
+								<FormControl>
+									<Input placeholder='Club' {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name='team'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel className='text-xs'>Team (optional)</FormLabel>
+								<FormControl>
+									<Input placeholder='Team' {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</div>
+
+				<FormField
+					control={form.control}
+					name='phone'
+					render={({ field }) => (
+						<FormItem className='w-1/2'>
+							<FormLabel className='text-xs'>Phone (optional)</FormLabel>
+							<FormControl>
+								<Input placeholder='Phone' {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 
 				<div className='flex items-center justify-end pt-4 border-t border-solid border-bgSecondaryMedium'>
 					<DialogClose asChild>

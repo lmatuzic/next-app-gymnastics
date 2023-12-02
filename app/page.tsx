@@ -1,5 +1,4 @@
 import Badge from '@/app/components/Badge';
-import { DatePicker } from '@/app/components/dropdowns/DatePicker';
 import ApplyGymnastForm from '@/app/components/forms/ApplyGymnastForm';
 import H1 from '@/app/components/headings/H1';
 import { Button } from '@/app/components/shadcn/Button';
@@ -60,8 +59,6 @@ export default async function Page() {
 					</div>
 				</div>
 			</header>
-
-			<DatePicker />
 		</div>
 	);
 }
