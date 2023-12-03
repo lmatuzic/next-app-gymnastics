@@ -26,11 +26,12 @@ export default function useDataTable({
 		return (
 			<>
 				<div>
-					<span className='font-bold'>Date of birth:</span> {formattedDate}
+					<span className='mr-1 font-bold'>Date of birth:</span>
+					{formattedDate}
 				</div>
 
 				<div>
-					<span className='font-bold'>Phone number:</span>
+					<span className='mr-1 font-bold'>Phone number:</span>
 					{row.original.phone}
 				</div>
 			</>

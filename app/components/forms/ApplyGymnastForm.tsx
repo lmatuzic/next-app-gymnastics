@@ -49,16 +49,18 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-				<div className='flex items-baseline gap-4'>
+				<div className='flex flex-col items-baseline gap-4 sm:flex-row'>
 					<FormField
 						control={form.control}
 						name='firstName'
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-xs'>First name</FormLabel>
+
 								<FormControl>
 									<Input placeholder='First name' {...field} />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -70,9 +72,11 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-xs'>Last name</FormLabel>
+
 								<FormControl>
 									<Input placeholder='Last name' {...field} />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -84,25 +88,29 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						render={() => (
 							<FormItem>
 								<FormLabel className='text-xs'>Country</FormLabel>
+
 								<FormControl>
 									<CountryDropdown countries={countries} />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 				</div>
 
-				<div className='flex items-baseline gap-4'>
+				<div className='flex flex-col items-baseline gap-4 sm:flex-row'>
 					<FormField
 						control={form.control}
 						name='country'
 						render={() => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-xs'>Program and category</FormLabel>
+
 								<FormControl>
-									<ProgramDropdown programs={programs} categories={categories} />
+									<ProgramDropdown />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -114,25 +122,29 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						render={() => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-xs'>Date of birth</FormLabel>
+
 								<FormControl>
 									<DatePicker />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 				</div>
 
-				<div className='flex items-center gap-4'>
+				<div className='flex flex-col items-center gap-4 sm:flex-row'>
 					<FormField
 						control={form.control}
 						name='club'
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-xs'>Club (optional)</FormLabel>
+
 								<FormControl>
 									<Input placeholder='Club' {...field} />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -144,9 +156,11 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel className='text-xs'>Team (optional)</FormLabel>
+
 								<FormControl>
 									<Input placeholder='Team' {...field} />
 								</FormControl>
+
 								<FormMessage />
 							</FormItem>
 						)}
@@ -157,11 +171,13 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 					control={form.control}
 					name='phone'
 					render={({ field }) => (
-						<FormItem className='w-1/2'>
+						<FormItem className='sm:w-1/2'>
 							<FormLabel className='text-xs'>Phone (optional)</FormLabel>
+
 							<FormControl>
 								<Input placeholder='Phone' {...field} />
 							</FormControl>
+
 							<FormMessage />
 						</FormItem>
 					)}

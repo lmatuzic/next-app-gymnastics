@@ -8,14 +8,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/app/components/shadcn/Select';
-import { Category, Program } from '@/app/typings/applications';
+import { programsAndCategories } from '@/app/contants/applications';
 
-export type ProgramDropdownProps = {
-	programs: Program[];
-	categories: Category[];
-};
-
-export default function ProgramDropdown({ programs, categories }: ProgramDropdownProps) {
+export default function ProgramDropdown() {
 	return (
 		<Select>
 			<SelectTrigger className='w-full'>
@@ -24,11 +19,9 @@ export default function ProgramDropdown({ programs, categories }: ProgramDropdow
 
 			<SelectContent>
 				<SelectGroup>
-					{programs.map((program) => (
-						<SelectItem value={program.name} key={program.name}>
-							<div className='flex items-center gap-2'>
-								<span>{program.name}</span>
-							</div>
+					{programsAndCategories.map((item) => (
+						<SelectItem value={item.name} key={item.name}>
+							{item.name}
 						</SelectItem>
 					))}
 				</SelectGroup>

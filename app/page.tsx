@@ -31,8 +31,8 @@ export default async function Page() {
 
 	return (
 		<div>
-			<header className='flex items-center justify-between pb-8 mb-12 border-b border-solid border-bgSecondaryMedium'>
-				<H1 text='My Applications' />
+			<header className='flex flex-col items-center justify-between pb-8 mb-12 border-b border-solid sm:flex-row border-bgSecondaryMedium'>
+				<H1 text='My Applications' className='mb-8 sm:mb-0' />
 
 				<div className='flex items-center gap-4'>
 					<ApplicationDialog>

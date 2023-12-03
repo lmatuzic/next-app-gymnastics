@@ -47,7 +47,7 @@ export function DataTable({ data, countries }: DataTableProps) {
 	return (
 		<div className='border rounded-md'>
 			<Table className='text-sm'>
-				<TableHeader className='bg-[#EAE9EF]'>
+				<TableHeader className='bg-bgSecondary'>
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
@@ -64,10 +64,6 @@ export function DataTable({ data, countries }: DataTableProps) {
 				<TableBody>
 					{table.getRowModel().rows?.length ? (
 						table.getRowModel().rows.map((row) => {
-							console.log(row.getIsSelected());
-
-							row.originalSubRows;
-
 							return (
 								<Fragment key={row.original.id}>
 									<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
