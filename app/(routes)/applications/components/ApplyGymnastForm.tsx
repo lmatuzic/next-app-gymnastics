@@ -14,6 +14,8 @@ import {
 	FormMessage,
 } from '@/app/components/shadcn/Form';
 import { Input } from '@/app/components/shadcn/Input';
+import { APPLICATION } from '@/app/contants/endpoints';
+import { useToast } from '@/app/hooks/useToast';
 import { Country } from '@/app/typings/countries';
 import { applicationSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,6 +37,8 @@ type FormKey =
 	| 'phone';
 
 export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
+	const { toast } = useToast();
+
 	const form = useForm<z.infer<typeof applicationSchema>>({
 		resolver: zodResolver(applicationSchema),
 		reValidateMode: 'onBlur',
@@ -64,9 +68,31 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 		document.getElementById('close-dialog')?.click();
 	};
 
-	const onSubmit = (values: z.infer<typeof applicationSchema>) => {
-		console.log(values);
-		// closeApplicationDialog();
+	const onSubmit = async (values: z.infer<typeof applicationSchema>) => {
+		try {
+			const response = await fetch(APPLICATION, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(values),
+			});
+
+			if (response.ok) {
+				toast({
+					title: 'Application submitted successfully!',
+				});
+			} else {
+				toast({
+					title: 'Failed to submit application.',
+					variant: 'destructive',
+				});
+			}
+		} catch (error) {
+			console.error('Error:', error);
+		} finally {
+			closeApplicationDialog();
+		}
 	};
 
 	return (

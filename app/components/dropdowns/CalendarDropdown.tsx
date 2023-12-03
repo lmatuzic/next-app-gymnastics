@@ -1,7 +1,6 @@
 'use client';
 
 import { Calendar } from '@/app/components/shadcn/Calendar';
-import { Dispatch, SetStateAction } from 'react';
 
 type CalendarDropdownProps = {
 	date: Date | undefined;

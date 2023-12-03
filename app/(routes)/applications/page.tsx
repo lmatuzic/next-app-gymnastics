@@ -1,12 +1,13 @@
+import ApplicationDialog from '@/app/(routes)/applications/components/ApplicationDialog';
 import ApplyGymnastForm from '@/app/(routes)/applications/components/ApplyGymnastForm';
-import { DataTable } from '@/app/(routes)/applications/components/DataTable/DataTable';
-import ApplicationDialog from '@/app/components/dialogs/ApplicationDialog';
+import { DataTable } from '@/app/(routes)/applications/components/DataTable';
 import H1 from '@/app/components/headings/H1';
 import Badge from '@/app/components/status/Badge';
+import { APPLICATIONS, COUNTRIES } from '@/app/contants/endpoints';
 import { GymnastApplication } from '@/app/typings/applications';
 
 async function getCountries() {
-	const res = await fetch('https://elevien-fe-job.free.beeceptor.com/countries');
+	const res = await fetch(COUNTRIES);
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch countries data');
@@ -16,7 +17,7 @@ async function getCountries() {
 }
 
 async function getApplications() {
-	const res = await fetch('https://elevien-fe-job.free.beeceptor.com/applications');
+	const res = await fetch(APPLICATIONS);
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch applications data');

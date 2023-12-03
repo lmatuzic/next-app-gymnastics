@@ -6,7 +6,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/app/components/shadcn
 import { cn } from '@/app/utils/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-// import { useState } from 'react';
 
 type DatePickerProps = {
 	selectedDate: Date;
@@ -14,8 +13,6 @@ type DatePickerProps = {
 };
 
 export function DatePicker({ selectedDate, handleSetSelectedDate }: DatePickerProps) {
-	// const [date, setDate] = useState<Date>();
-
 	return (
 		<Popover>
 			<PopoverTrigger asChild>

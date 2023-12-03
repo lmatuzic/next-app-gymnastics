@@ -1,7 +1,8 @@
+import Navigation from '@/app/components/navigation/Navigation';
+import { Toaster } from '@/app/components/shadcn/Toaster';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Navigation from '@/app/components/navigation/Navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body className={`${inter.className} min-h-screen`}>
 				<Navigation />
 				<main className='container items-center justify-between px-4 my-8'>{children}</main>
+				<Toaster />
 			</body>
 		</html>
 	);

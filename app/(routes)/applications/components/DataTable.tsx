@@ -1,6 +1,6 @@
 'use client';
 
-import useDataTable from '@/app/(routes)/applications/components/DataTable/useDataTable';
+import useDataTable from '@/app/(routes)/applications/hooks/useDataTable';
 import {
 	Table,
 	TableBody,
