@@ -15,7 +15,7 @@ export default function NavLink({ route }: NavLinkProps) {
 		<Link
 			href={route.path}
 			className={
-				route.path === currentPath ? 'text-zk-green' : 'hover:text-zk-green transition-colors'
+				route.path === currentPath ? 'text-primary' : 'hover:text-primary transition-colors'
 			}
 		>
 			{route.name}
