@@ -1,5 +1,5 @@
 import { DataTable } from '@/app/(routes)/applications/components/DataTable/DataTable';
-import Badge from '@/app/components/Badge';
+import Badge from '@/app/components/status/Badge';
 import ApplicationDialog from '@/app/components/dialogs/ApplicationDialog';
 import ApplyGymnastForm from '@/app/components/forms/ApplyGymnastForm';
 import H1 from '@/app/components/headings/H1';
@@ -31,7 +31,7 @@ export default async function ApplicationsPage() {
 
 	return (
 		<div>
-			<header className='flex flex-col items-center justify-between pb-8 mb-12 border-b border-solid sm:flex-row border-bgSecondaryMedium'>
+			<header className='flex flex-col items-center justify-between pb-8 mb-12 border-b border-solid sm:flex-row border-dividerMedium'>
 				<H1 text='My Applications' className='mb-8 sm:mb-0' />
 
 				<div className='flex items-center gap-4'>

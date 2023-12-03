@@ -1,6 +1,6 @@
 'use client';
 
-import StatusIndicator from '@/app/components/StatusIndicator';
+import StatusIndicator from '@/app/components/status/StatusIndicator';
 import { GymnastApplication } from '@/app/typings/applications';
 import { Country } from '@/app/typings/countries';
 import { ColumnDef, Row } from '@tanstack/react-table';

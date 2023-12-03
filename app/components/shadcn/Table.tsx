@@ -43,29 +43,13 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
 	({ className, ...props }, ref) => (
 		<tr
 			ref={ref}
-			className={cn(
-				'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
-				className
-			)}
+			className={cn('border-b transition-colors data-[state=selected]:bg-muted', className)}
 			{...props}
 		/>
 	)
 );
 
 TableRow.displayName = 'TableRow';
-
-const ExpandableTableRow = React.forwardRef<
-	HTMLTableRowElement,
-	React.HTMLAttributes<HTMLTableRowElement>
->(({ className, ...props }, ref) => (
-	<tr
-		ref={ref}
-		className={cn('transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', className)}
-		{...props}
-	/>
-));
-
-ExpandableTableRow.displayName = 'ExpandableTableRow';
 
 const TableHead = React.forwardRef<
 	HTMLTableCellElement,
@@ -102,14 +86,4 @@ const TableCaption = React.forwardRef<
 ));
 TableCaption.displayName = 'TableCaption';
 
-export {
-	Table,
-	TableHeader,
-	TableBody,
-	TableFooter,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableCaption,
-	ExpandableTableRow,
-};
+export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };

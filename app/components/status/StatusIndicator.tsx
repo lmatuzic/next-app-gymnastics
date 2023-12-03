@@ -6,7 +6,7 @@ export default function StatusIndicator({ text }: StatusIndicatorProps) {
 	const colorClasses = {
 		applied: 'bg-success',
 		declined: 'bg-alert',
-		canceled: 'bg-disabled',
+		canceled: 'bg-bgSecondaryIos !text-tertiaryDark',
 		'awaiting response': 'bg-warning',
 	};
 

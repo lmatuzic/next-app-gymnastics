@@ -2,15 +2,18 @@
 
 import CalendarDropdown from '@/app/components/dropdowns/CalendarDropdown';
 import { Button } from '@/app/components/shadcn/Button';
-import { Calendar } from '@/app/components/shadcn/Calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/app/components/shadcn/Popover';
 import { cn } from '@/app/utils/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-import * as React from 'react';
+import { useState } from 'react';
+
+// type DatePickerProps = {
+// 	selectedDate: Date;
+// };
 
 export function DatePicker() {
-	const [date, setDate] = React.useState<Date>();
+	const [date, setDate] = useState<Date>();
 
 	return (
 		<Popover>
@@ -18,7 +21,7 @@ export function DatePicker() {
 				<Button
 					variant={'outline'}
 					className={cn(
-						'w-full justify-start text-left font-normal',
+						'w-full justify-start text-left font-normal focus:border-primaryVariantJudge',
 						!date && 'text-muted-foreground'
 					)}
 				>
@@ -28,7 +31,6 @@ export function DatePicker() {
 			</PopoverTrigger>
 
 			<PopoverContent className='w-auto p-0' align='start'>
-				{/* <Calendar mode='single' selected={date} onSelect={setDate} initialFocus /> */}
 				<CalendarDropdown date={date} handleSetDate={setDate} />
 			</PopoverContent>
 		</Popover>

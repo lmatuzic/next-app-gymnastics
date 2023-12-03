@@ -8,11 +8,21 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/app/components/shadcn/Select';
-import { CountryDropdownProps } from '@/app/typings/countries';
+import { Country } from '@/app/typings/countries';
 
-export function CountryDropdown({ countries }: CountryDropdownProps) {
+type CountryDropdownProps = {
+	countries: Country[];
+	selectedCountryValue: string | undefined;
+	handleSelectChange: (option: any) => void;
+};
+
+export function CountryDropdown({
+	countries,
+	selectedCountryValue,
+	handleSelectChange,
+}: CountryDropdownProps) {
 	return (
-		<Select>
+		<Select value={selectedCountryValue} onValueChange={(e) => handleSelectChange(e)}>
 			<SelectTrigger className='w-full'>
 				<SelectValue placeholder='Select country' />
 			</SelectTrigger>
@@ -20,7 +30,7 @@ export function CountryDropdown({ countries }: CountryDropdownProps) {
 			<SelectContent>
 				<SelectGroup>
 					{countries.map((country) => (
-						<SelectItem value={country.code} key={country.code}>
+						<SelectItem value={country.name} key={country.name}>
 							<div className='flex items-center gap-2'>
 								<span className='text-3xl'>{country.flag}</span>
 								<span>{country.name.substring(0, 3).toUpperCase()}</span>

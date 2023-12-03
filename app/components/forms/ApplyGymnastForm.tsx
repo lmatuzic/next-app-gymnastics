@@ -1,7 +1,7 @@
 'use client';
 
+import { DatePicker } from '@/app/components/dates/DatePicker';
 import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
-import { DatePicker } from '@/app/components/dropdowns/DatePicker';
 import ProgramDropdown from '@/app/components/dropdowns/ProgramDropdown';
 import { Button } from '@/app/components/shadcn/Button';
 import { DialogClose } from '@/app/components/shadcn/Dialog';
@@ -14,16 +14,25 @@ import {
 	FormMessage,
 } from '@/app/components/shadcn/Form';
 import { Input } from '@/app/components/shadcn/Input';
-import { categories, programs } from '@/app/contants/applications';
 import { Country } from '@/app/typings/countries';
 import { applicationSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 type ApplyGymnastForm = {
 	countries: Country[];
 };
+
+type FormKey =
+	| 'firstName'
+	| 'lastName'
+	| 'country'
+	| 'programAndCategory'
+	| 'dateOfBirth'
+	| 'club'
+	| 'team'
+	| 'phone';
 
 export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 	const form = useForm<z.infer<typeof applicationSchema>>({
@@ -31,16 +40,23 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 		defaultValues: {
 			firstName: '',
 			lastName: '',
-			country: {
-				code: '',
-			},
+			country: '',
 			programAndCategory: '',
-			dateOfBirth: new Date(),
+			dateOfBirth: undefined,
 			club: '',
 			team: '',
 			phone: '',
 		},
 	});
+
+	const control = form.control;
+	const { field } = useController({ name: 'country', control });
+
+	const handleSelectChange = (key: FormKey, option: any) => {
+		field.onChange(option.value);
+		form.setValue(key, option);
+		form.clearErrors(key);
+	};
 
 	const onSubmit = (values: z.infer<typeof applicationSchema>) => {
 		console.log(values);
@@ -90,7 +106,13 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 								<FormLabel className='text-xs'>Country</FormLabel>
 
 								<FormControl>
-									<CountryDropdown countries={countries} />
+									<CountryDropdown
+										countries={countries}
+										selectedCountryValue={
+											countries.find((country) => country.code === field.value)?.name
+										}
+										handleSelectChange={(e) => handleSelectChange('country', e)}
+									/>
 								</FormControl>
 
 								<FormMessage />
@@ -102,7 +124,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 				<div className='flex flex-col items-baseline gap-4 sm:flex-row'>
 					<FormField
 						control={form.control}
-						name='country'
+						name='programAndCategory'
 						render={() => (
 							<FormItem className='w-full'>
 								<FormLabel className='text-xs'>Program and category</FormLabel>

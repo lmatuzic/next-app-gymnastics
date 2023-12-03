@@ -5,7 +5,3 @@ export type Country = {
 	phoneCode: string;
 	flag: '🇦🇫';
 };
-
-export type CountryDropdownProps = {
-	countries: Country[];
-};
