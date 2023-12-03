@@ -10,9 +10,24 @@ import {
 } from '@/app/components/shadcn/Select';
 import { programsAndCategories } from '@/app/contants/applications';
 
-export default function ProgramDropdown() {
+type ProgramDropdownProps = {
+	selectedProgramAndCategory: string | undefined;
+	handleSelectChange: (option: any) => void;
+};
+
+export default function ProgramDropdown({
+	selectedProgramAndCategory,
+	handleSelectChange,
+}: ProgramDropdownProps) {
 	return (
-		<Select>
+		<Select
+			value={
+				programsAndCategories.find(
+					(programsAndCategory) => programsAndCategory.name === selectedProgramAndCategory
+				)?.name
+			}
+			onValueChange={(e) => handleSelectChange(e)}
+		>
 			<SelectTrigger className='w-full'>
 				<SelectValue placeholder='Select program' />
 			</SelectTrigger>

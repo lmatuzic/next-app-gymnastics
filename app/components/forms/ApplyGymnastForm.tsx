@@ -108,9 +108,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 								<FormControl>
 									<CountryDropdown
 										countries={countries}
-										selectedCountryValue={
-											countries.find((country) => country.code === field.value)?.name
-										}
+										selectedCountry={field.value}
 										handleSelectChange={(e) => handleSelectChange('country', e)}
 									/>
 								</FormControl>
@@ -130,7 +128,10 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 								<FormLabel className='text-xs'>Program and category</FormLabel>
 
 								<FormControl>
-									<ProgramDropdown />
+									<ProgramDropdown
+										selectedProgramAndCategory={field.value}
+										handleSelectChange={(e) => handleSelectChange('programAndCategory', e)}
+									/>
 								</FormControl>
 
 								<FormMessage />

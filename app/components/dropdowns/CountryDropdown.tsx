@@ -12,17 +12,20 @@ import { Country } from '@/app/typings/countries';
 
 type CountryDropdownProps = {
 	countries: Country[];
-	selectedCountryValue: string | undefined;
+	selectedCountry: string | undefined;
 	handleSelectChange: (option: any) => void;
 };
 
 export function CountryDropdown({
 	countries,
-	selectedCountryValue,
+	selectedCountry,
 	handleSelectChange,
 }: CountryDropdownProps) {
 	return (
-		<Select value={selectedCountryValue} onValueChange={(e) => handleSelectChange(e)}>
+		<Select
+			value={countries.find((country) => country.code === selectedCountry)?.name}
+			onValueChange={(e) => handleSelectChange(e)}
+		>
 			<SelectTrigger className='w-full'>
 				<SelectValue placeholder='Select country' />
 			</SelectTrigger>
