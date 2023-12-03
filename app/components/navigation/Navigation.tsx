@@ -1,11 +1,11 @@
 import logo from '@/app/assets/logo/logo.svg';
+import AccountDropdown from '@/app/components/dropdowns/AccountDropdown';
 import H3 from '@/app/components/headings/H3';
-import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/shadcn/Avatar';
+import NavLink from '@/app/components/navigation/NavLink';
 import { HOME_PAGE, routes } from '@/app/contants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import MobileNavigation from './MobileNavigation';
-import NavLink from '@/app/components/navigation/NavLink';
 
 export default async function Navigation() {
 	return (
@@ -32,14 +32,7 @@ export default async function Navigation() {
 						))}
 					</ul>
 
-					<div className='flex items-center gap-2'>
-						<Avatar>
-							<AvatarImage src='/avatar.png' alt='avatar' />
-							<AvatarFallback>You</AvatarFallback>
-						</Avatar>
-
-						<span className='text-sm'>Nikola Kavezić</span>
-					</div>
+					<AccountDropdown />
 				</div>
 
 				<MobileNavigation />
