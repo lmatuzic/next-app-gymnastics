@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang='en'>
 			<body className={`${inter.className} min-h-screen`}>
 				<Navigation />
-				<main className='container items-center justify-between my-8'>{children}</main>
+				<main className='container items-center justify-between px-4 my-8'>{children}</main>
 			</body>
 		</html>
 	);

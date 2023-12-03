@@ -17,7 +17,7 @@ import { Input } from '@/app/components/shadcn/Input';
 import { Country } from '@/app/typings/countries';
 import { applicationSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useController, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 type ApplyGymnastForm = {
@@ -37,6 +37,7 @@ type FormKey =
 export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 	const form = useForm<z.infer<typeof applicationSchema>>({
 		resolver: zodResolver(applicationSchema),
+		reValidateMode: 'onBlur',
 		defaultValues: {
 			firstName: '',
 			lastName: '',
@@ -49,17 +50,23 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 		},
 	});
 
-	const control = form.control;
-	const { field } = useController({ name: 'country', control });
-
 	const handleSelectChange = (key: FormKey, option: any) => {
-		field.onChange(option.value);
 		form.setValue(key, option);
 		form.clearErrors(key);
 	};
 
+	const handleSetBirthDate = (date: Date) => {
+		form.setValue('dateOfBirth', date);
+		form.clearErrors('dateOfBirth');
+	};
+
+	const closeApplicationDialog = () => {
+		document.getElementById('close-dialog')?.click();
+	};
+
 	const onSubmit = (values: z.infer<typeof applicationSchema>) => {
 		console.log(values);
+		// closeApplicationDialog();
 	};
 
 	return (
@@ -101,14 +108,14 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 					<FormField
 						control={form.control}
 						name='country'
-						render={() => (
+						render={(data) => (
 							<FormItem>
 								<FormLabel className='text-xs'>Country</FormLabel>
 
 								<FormControl>
 									<CountryDropdown
 										countries={countries}
-										selectedCountry={field.value}
+										selectedCountry={data.field.value}
 										handleSelectChange={(e) => handleSelectChange('country', e)}
 									/>
 								</FormControl>
@@ -123,36 +130,43 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 					<FormField
 						control={form.control}
 						name='programAndCategory'
-						render={() => (
-							<FormItem className='w-full'>
-								<FormLabel className='text-xs'>Program and category</FormLabel>
+						render={(data) => {
+							return (
+								<FormItem className='w-full'>
+									<FormLabel className='text-xs'>Program and category</FormLabel>
 
-								<FormControl>
-									<ProgramDropdown
-										selectedProgramAndCategory={field.value}
-										handleSelectChange={(e) => handleSelectChange('programAndCategory', e)}
-									/>
-								</FormControl>
+									<FormControl>
+										<ProgramDropdown
+											selectedProgramAndCategory={data.field.value}
+											handleSelectChange={(e) => handleSelectChange('programAndCategory', e)}
+										/>
+									</FormControl>
 
-								<FormMessage />
-							</FormItem>
-						)}
+									<FormMessage />
+								</FormItem>
+							);
+						}}
 					/>
 
 					<FormField
 						control={form.control}
 						name='dateOfBirth'
-						render={() => (
-							<FormItem className='w-full'>
-								<FormLabel className='text-xs'>Date of birth</FormLabel>
+						render={(data) => {
+							return (
+								<FormItem className='w-full'>
+									<FormLabel className='text-xs'>Date of birth</FormLabel>
 
-								<FormControl>
-									<DatePicker />
-								</FormControl>
+									<FormControl>
+										<DatePicker
+											selectedDate={data.field.value}
+											handleSetSelectedDate={(e) => handleSetBirthDate(e)}
+										/>
+									</FormControl>
 
-								<FormMessage />
-							</FormItem>
-						)}
+									<FormMessage />
+								</FormItem>
+							);
+						}}
 					/>
 				</div>
 

@@ -10,7 +10,7 @@ import MobileNavigation from './MobileNavigation';
 export default async function Navigation() {
 	return (
 		<nav className='w-full shadow-[0_4px_4px_0px_rgba(0,0,0,0.08)]'>
-			<div className='container flex items-center justify-between py-4'>
+			<div className='container flex items-center justify-between p-4'>
 				<div className='flex items-center'>
 					<Link href={HOME_PAGE}>
 						<Image src={logo} width={32} height={32} alt='Gymnastics app logo' className='mr-4' />

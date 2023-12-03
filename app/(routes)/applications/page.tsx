@@ -1,8 +1,8 @@
+import ApplyGymnastForm from '@/app/(routes)/applications/components/ApplyGymnastForm';
 import { DataTable } from '@/app/(routes)/applications/components/DataTable/DataTable';
-import Badge from '@/app/components/status/Badge';
 import ApplicationDialog from '@/app/components/dialogs/ApplicationDialog';
-import ApplyGymnastForm from '@/app/components/forms/ApplyGymnastForm';
 import H1 from '@/app/components/headings/H1';
+import Badge from '@/app/components/status/Badge';
 import { GymnastApplication } from '@/app/typings/applications';
 
 async function getCountries() {

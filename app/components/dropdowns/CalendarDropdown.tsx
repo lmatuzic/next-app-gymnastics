@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 type CalendarDropdownProps = {
 	date: Date | undefined;
-	handleSetDate: Dispatch<SetStateAction<Date | undefined>>;
+	handleSetDate: (date: Date) => void;
 };
 
 export default function CalendarDropdown({ date, handleSetDate }: CalendarDropdownProps) {
@@ -13,11 +13,11 @@ export default function CalendarDropdown({ date, handleSetDate }: CalendarDropdo
 		<Calendar
 			initialFocus
 			mode='single'
-			captionLayout='dropdown-buttons' //Also: dropdown | buttons
+			captionLayout='dropdown-buttons' // dropdown | buttons | dropdown-buttons
 			fromYear={1980}
 			toYear={2023}
 			selected={date}
-			onSelect={handleSetDate}
+			onSelect={(e) => handleSetDate(e as Date)}
 			// numberOfMonths={2}
 			className='border rounded-md'
 		/>

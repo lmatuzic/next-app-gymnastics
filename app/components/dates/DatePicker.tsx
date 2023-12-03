@@ -6,14 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/app/components/shadcn
 import { cn } from '@/app/utils/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-// type DatePickerProps = {
-// 	selectedDate: Date;
-// };
+type DatePickerProps = {
+	selectedDate: Date;
+	handleSetSelectedDate: (date: Date) => void;
+};
 
-export function DatePicker() {
-	const [date, setDate] = useState<Date>();
+export function DatePicker({ selectedDate, handleSetSelectedDate }: DatePickerProps) {
+	// const [date, setDate] = useState<Date>();
 
 	return (
 		<Popover>
@@ -22,16 +23,16 @@ export function DatePicker() {
 					variant={'outline'}
 					className={cn(
 						'w-full justify-start text-left font-normal focus:border-primaryVariantJudge',
-						!date && 'text-muted-foreground'
+						!selectedDate && 'text-muted-foreground'
 					)}
 				>
 					<CalendarIcon className='w-4 h-4 mr-2' />
-					{date ? format(date, 'PPP') : <span>Pick a date</span>}
+					{selectedDate ? format(selectedDate, 'PPP') : <span>Pick a date</span>}
 				</Button>
 			</PopoverTrigger>
 
 			<PopoverContent className='w-auto p-0' align='start'>
-				<CalendarDropdown date={date} handleSetDate={setDate} />
+				<CalendarDropdown date={selectedDate} handleSetDate={handleSetSelectedDate} />
 			</PopoverContent>
 		</Popover>
 	);
