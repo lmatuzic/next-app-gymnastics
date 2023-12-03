@@ -23,10 +23,10 @@ export default async function Navigation() {
 					</div>
 				</div>
 
-				<div className='flex items-center gap-4'>
+				<div className='items-center hidden gap-4 md:flex'>
 					<ul className='flex justify-between w-full sm:w-auto sm:items-center'>
 						{routes.map((route) => (
-							<li key={route.path} className='hidden mr-6 sm:flex'>
+							<li key={route.path} className='mr-6'>
 								<NavLink route={route} />
 							</li>
 						))}

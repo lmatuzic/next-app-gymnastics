@@ -45,9 +45,9 @@ export function DataTable({ data, countries }: DataTableProps) {
 	});
 
 	return (
-		<div className='border rounded-md'>
+		<div className='overflow-hidden border rounded-lg'>
 			<Table className='text-sm'>
-				<TableHeader className='bg-bgSecondary'>
+				<TableHeader className='rounded-lg bg-bgSecondary'>
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
@@ -66,7 +66,11 @@ export function DataTable({ data, countries }: DataTableProps) {
 						table.getRowModel().rows.map((row) => {
 							return (
 								<Fragment key={row.original.id}>
-									<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+									<TableRow
+										key={row.id}
+										data-state={row.getIsSelected() && 'selected'}
+										className='odd:bg-[#FAFAFA]'
+									>
 										{row.getVisibleCells().map((cell) => (
 											<TableCell key={cell.id}>
 												{flexRender(cell.column.columnDef.cell, cell.getContext())}
