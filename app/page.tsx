@@ -36,6 +36,8 @@ export default async function Page() {
 	const countries = await getCountries();
 	const applications = await getApplications();
 
+	console.log(applications);
+
 	return (
 		<div>
 			<header className='flex items-center justify-between pb-8 mb-12 border-b border-solid border-bgSecondaryMedium'>

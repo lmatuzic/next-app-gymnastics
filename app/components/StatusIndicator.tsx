@@ -3,25 +3,24 @@ type StatusIndicatorProps = {
 };
 
 export default function StatusIndicator({ text }: StatusIndicatorProps) {
-	const getCorrectBgColor = () => {
-		if (text === 'applied') {
-			return 'success';
-		}
+	let bgColor;
 
-		if (text === 'declined') {
-			return 'bgPrimaryDark';
-		}
-
-		if (text === 'canceled') {
-			return 'bgSecondaryMedium';
-		}
-
-		if (text === 'awaiting response') {
-			return 'warning';
-		}
-	};
-
-	const bgColor = getCorrectBgColor();
+	switch (text) {
+		case 'applied':
+			bgColor = 'success';
+			break;
+		case 'declined':
+			bgColor = 'alert';
+			break;
+		case 'canceled':
+			bgColor = 'disabled';
+			break;
+		case 'awaiting response':
+			bgColor = 'warning';
+			break;
+		default:
+			bgColor = ''; // Default class if text doesn't match any case
+	}
 
 	return (
 		<div
