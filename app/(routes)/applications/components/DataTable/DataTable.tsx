@@ -1,5 +1,6 @@
 'use client';
 
+import useDataTable from '@/app/(routes)/applications/components/DataTable/useDataTable';
 import {
 	Table,
 	TableBody,
@@ -8,33 +9,38 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/app/components/shadcn/Table';
+import { GymnastApplication } from '@/app/typings/applications';
+import { Country } from '@/app/typings/countries';
 import {
-	ColumnDef,
-	ExpandedState,
 	flexRender,
 	getCoreRowModel,
 	getExpandedRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
-interface DataTableProps<TData, TValue> {
-	columns: ColumnDef<TData, TValue>[];
-	data: TData[];
+interface DataTableProps {
+	data: GymnastApplication[];
+	countries: Country[];
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-	const [expanded, setExpanded] = useState<ExpandedState>({});
+export function DataTable({ data, countries }: DataTableProps) {
+	const [isRowExpanded, setIsRowExpanded] = useState(false);
+
+	const handleToggleRowExpansion = () => {
+		setIsRowExpanded((prevExpanded) => !prevExpanded);
+	};
+
+	const { dataTableColumns, renderSubComponent } = useDataTable({
+		countries,
+		isRowExpanded,
+		handleToggleRowExpansion,
+	});
 
 	const table = useReactTable({
 		data,
-		columns,
+		columns: dataTableColumns,
 		getCoreRowModel: getCoreRowModel(),
-		// getSubRows: (row) => row.subRows,
-		state: {
-			expanded,
-		},
-		onExpandedChange: setExpanded,
 		getExpandedRowModel: getExpandedRowModel(),
 	});
 
@@ -58,19 +64,31 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 				<TableBody>
 					{table.getRowModel().rows?.length ? (
 						table.getRowModel().rows.map((row) => {
+							console.log(row.getIsSelected());
+
+							row.originalSubRows;
+
 							return (
-								<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>
-											{flexRender(cell.column.columnDef.cell, cell.getContext())}
-										</TableCell>
-									))}
-								</TableRow>
+								<Fragment key={row.original.id}>
+									<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+										{row.getVisibleCells().map((cell) => (
+											<TableCell key={cell.id}>
+												{flexRender(cell.column.columnDef.cell, cell.getContext())}
+											</TableCell>
+										))}
+									</TableRow>
+
+									{isRowExpanded ? (
+										<TableRow>
+											<TableCell className='text-xs'>{renderSubComponent(row)}</TableCell>
+										</TableRow>
+									) : null}
+								</Fragment>
 							);
 						})
 					) : (
 						<TableRow>
-							<TableCell colSpan={columns.length} className='h-24 text-center'>
+							<TableCell colSpan={dataTableColumns.length} className='h-24 text-center'>
 								No results.
 							</TableCell>
 						</TableRow>
