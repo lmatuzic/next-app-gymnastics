@@ -30,7 +30,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
-		getSubRows: (row) => row.subRows,
+		// getSubRows: (row) => row.subRows,
 		state: {
 			expanded,
 		},
@@ -40,12 +40,12 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
 	return (
 		<div className='border rounded-md'>
-			<Table>
-				<TableHeader>
+			<Table className='text-sm'>
+				<TableHeader className='bg-[#EAE9EF]'>
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
-								<TableHead key={header.id}>
+								<TableHead key={header.id} className='font-bold text-textPrimary'>
 									{header.isPlaceholder
 										? null
 										: flexRender(header.column.columnDef.header, header.getContext())}

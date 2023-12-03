@@ -16,7 +16,7 @@ export const columns: ColumnDef<GymnastApplication>[] = [
 					<span>{row.original.lastName}</span>
 				</div>
 
-				<div>
+				<div className='text-xs text-textSecondary'>
 					<span className='mr-1'>{row.original.country}</span>
 					<span>{row.original.club}</span>
 				</div>
@@ -54,7 +54,7 @@ export const columns: ColumnDef<GymnastApplication>[] = [
 			const date = new Date(row.original.date);
 			const formattedDate = format(date, 'MM.dd.yyyy. HH:mm');
 
-			return <span>{formattedDate}</span>;
+			return <span className='text-xs text-textPrimaryLight'>{formattedDate}</span>;
 		},
 	},
 ];

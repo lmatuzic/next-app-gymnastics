@@ -19,7 +19,7 @@ export default function StatusIndicator({ text }: StatusIndicatorProps) {
 			bgColor = 'warning';
 			break;
 		default:
-			bgColor = ''; // Default class if text doesn't match any case
+			bgColor = '';
 	}
 
 	return (
