@@ -11,14 +11,16 @@ import { useCallback, useMemo } from 'react';
 
 interface UseDataTableProps {
 	countries: Country[];
-	isRowExpanded: boolean;
-	handleToggleRowExpansion: () => void;
+	expandedRowId: string | null;
+	handleToggleRowExpansion: (row: Row<GymnastApplication>) => void;
+	rotateArrowClass: string;
 }
 
 export default function useDataTable({
 	countries,
-	isRowExpanded,
+	expandedRowId,
 	handleToggleRowExpansion,
+	rotateArrowClass,
 }: UseDataTableProps) {
 	const renderSubComponent = useCallback((row: Row<GymnastApplication>) => {
 		const date = new Date(row.original.dateOfBirth);
@@ -159,8 +161,8 @@ export default function useDataTable({
 				cell: ({ row }) => {
 					return (
 						<ChevronDown
-							className={`cursor-pointer w-4 ${isRowExpanded ? 'rotate-180' : ''}`}
-							onClick={handleToggleRowExpansion}
+							className={`cursor-pointer w-4`}
+							onClick={() => handleToggleRowExpansion(row)}
 						/>
 					);
 				},
@@ -168,5 +170,5 @@ export default function useDataTable({
 		];
 	}, []);
 
-	return { isRowExpanded, handleToggleRowExpansion, dataTableColumns, renderSubComponent };
+	return { dataTableColumns, renderSubComponent };
 }

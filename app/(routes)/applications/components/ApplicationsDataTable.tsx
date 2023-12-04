@@ -15,6 +15,7 @@ import { GymnastApplication } from '@/app/typings/applications';
 import { Country } from '@/app/typings/countries';
 import {
 	ColumnFiltersState,
+	Row,
 	SortingState,
 	flexRender,
 	getCoreRowModel,
@@ -34,16 +35,24 @@ interface DataTableProps {
 export function ApplicationsDataTable({ data, countries }: DataTableProps) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [sorting, setSorting] = useState<SortingState>([]);
-	const [isRowExpanded, setIsRowExpanded] = useState(false);
+	const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
+	const [rotateArrowClass, setRotateArrowClass] = useState('');
 
-	const handleToggleRowExpansion = () => {
-		setIsRowExpanded((prevExpanded) => !prevExpanded);
+	const handleToggleRowExpansion = (row: Row<GymnastApplication>) => {
+		setExpandedRowId((prevRowId) => {
+			if (prevRowId === row.id) {
+				return null;
+			}
+
+			return row.id;
+		});
 	};
 
 	const { dataTableColumns, renderSubComponent } = useDataTable({
 		countries,
-		isRowExpanded,
+		expandedRowId,
 		handleToggleRowExpansion,
+		rotateArrowClass,
 	});
 
 	const table = useReactTable({
@@ -109,11 +118,11 @@ export function ApplicationsDataTable({ data, countries }: DataTableProps) {
 											))}
 										</TableRow>
 
-										{isRowExpanded ? (
+										{row.id === expandedRowId && (
 											<TableRow>
 												<TableCell className='text-xs'>{renderSubComponent(row)}</TableCell>
 											</TableRow>
-										) : null}
+										)}
 									</Fragment>
 								);
 							})
