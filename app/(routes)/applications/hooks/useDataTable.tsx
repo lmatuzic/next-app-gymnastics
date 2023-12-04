@@ -1,11 +1,12 @@
 'use client';
 
+import { Button } from '@/app/components/shadcn/Button';
 import StatusIndicator from '@/app/components/status/StatusIndicator';
 import { GymnastApplication } from '@/app/typings/applications';
 import { Country } from '@/app/typings/countries';
 import { ColumnDef, Row } from '@tanstack/react-table';
 import { format } from 'date-fns';
-import { ChevronDown } from 'lucide-react';
+import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 
 interface UseDataTableProps {
@@ -62,14 +63,34 @@ export default function useDataTable({
 			},
 			{
 				accessorKey: 'discipline',
-				header: 'Discipline',
+				header: ({ column }) => {
+					return (
+						<Button
+							variant='ghost'
+							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+						>
+							Discipline
+							<ArrowUpDown className='w-4 h-4 ml-2' />
+						</Button>
+					);
+				},
 				cell: ({ row }) => {
 					return <span>{row.getValue('discipline')}</span>;
 				},
 			},
 			{
 				accessorKey: 'programName',
-				header: 'Program',
+				header: ({ column }) => {
+					return (
+						<Button
+							variant='ghost'
+							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+						>
+							Program
+							<ArrowUpDown className='w-4 h-4 ml-2' />
+						</Button>
+					);
+				},
 				cell: ({ row }) => {
 					return (
 						<>
@@ -80,17 +101,47 @@ export default function useDataTable({
 			},
 			{
 				accessorKey: 'category',
-				header: 'Category',
+				header: ({ column }) => {
+					return (
+						<Button
+							variant='ghost'
+							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+						>
+							Category
+							<ArrowUpDown className='w-4 h-4 ml-2' />
+						</Button>
+					);
+				},
 				cell: ({ row }) => <span>{row.original.categoryName}</span>,
 			},
 			{
 				accessorKey: 'team',
-				header: 'Team',
+				header: ({ column }) => {
+					return (
+						<Button
+							variant='ghost'
+							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+						>
+							Team
+							<ArrowUpDown className='w-4 h-4 ml-2' />
+						</Button>
+					);
+				},
 				cell: ({ row }) => <span>{row.original.teamName}</span>,
 			},
 			{
 				accessorKey: 'status',
-				header: 'Status',
+				header: ({ column }) => {
+					return (
+						<Button
+							variant='ghost'
+							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+						>
+							Status
+							<ArrowUpDown className='w-4 h-4 ml-2' />
+						</Button>
+					);
+				},
 				cell: ({ row }) => <StatusIndicator text={row.getValue('status')} />,
 			},
 			{
