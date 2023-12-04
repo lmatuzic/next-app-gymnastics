@@ -24,7 +24,7 @@ interface DataTableProps {
 	countries: Country[];
 }
 
-export function DataTable({ data, countries }: DataTableProps) {
+export function ApplicationsDataTable({ data, countries }: DataTableProps) {
 	const [isRowExpanded, setIsRowExpanded] = useState(false);
 
 	const handleToggleRowExpansion = () => {

@@ -1,6 +1,6 @@
-import { categories, programs } from '@/app/contants/applications';
+import { categories, programs } from '@/app/contants/programsAndCategories';
 
-export const getCombinedProgramsAndCategories = () => {
+export const getProgramsAndCategories = () => {
 	const combinedArray = [];
 
 	for (const program of programs) {

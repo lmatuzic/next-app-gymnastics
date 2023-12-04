@@ -19,7 +19,7 @@ import { useToast } from '@/app/hooks/useToast';
 import { Country } from '@/app/typings/countries';
 import { applicationSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useFormStatus } from 'react-dom';
+import { SyntheticEvent, use, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -38,7 +38,9 @@ type FormKey =
 	| 'phone';
 
 export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
-	const { pending } = useFormStatus();
+	const [selectedCountryName, setSelectedCountryName] = useState('');
+	const [selectedCountryPhoneCode, setSelectedCountryPhoneCode] = useState<string>();
+
 	const { toast } = useToast();
 
 	const form = useForm<z.infer<typeof applicationSchema>>({
@@ -61,9 +63,24 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 		form.clearErrors(key);
 	};
 
-	const handleSetBirthDate = (date: Date) => {
-		form.setValue('dateOfBirth', date);
-		form.clearErrors('dateOfBirth');
+	const handlSetSelectedCountryPhoneCode = (e: any) => {
+		setSelectedCountryPhoneCode(countries.find((country) => country.name === e)?.phoneCode);
+	};
+
+	const handleSetSelectedCountry = (countryName: any) => {
+		setSelectedCountryName(countryName);
+	};
+
+	const handlePhoneChange = (e: any) => {
+		const formattedCountryPhoneCode = `+${selectedCountryPhoneCode} `;
+
+		const inputValue = e.target.value;
+
+		if (!inputValue.startsWith(formattedCountryPhoneCode)) {
+			form.setValue('phone', `${formattedCountryPhoneCode}${inputValue}`);
+		} else {
+			form.setValue('phone', inputValue);
+		}
 	};
 
 	const closeApplicationDialog = () => {
@@ -89,6 +106,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 				title: `${error}`,
 				variant: 'destructive',
 			});
+
 			console.error('Error:', error);
 		} finally {
 			closeApplicationDialog();
@@ -142,7 +160,11 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 									<CountryDropdown
 										countries={countries}
 										selectedCountry={data.field.value}
-										handleSelectChange={(e) => handleSelectChange('country', e)}
+										handleSelectChange={(e) => {
+											handleSelectChange('country', e);
+											handleSetSelectedCountry(e);
+											handlSetSelectedCountryPhoneCode(e);
+										}}
 									/>
 								</FormControl>
 
@@ -185,7 +207,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 									<FormControl>
 										<DatePicker
 											selectedDate={data.field.value}
-											handleSetSelectedDate={(e) => handleSetBirthDate(e)}
+											handleSetSelectedDate={(e) => handleSelectChange('dateOfBirth', e)}
 										/>
 									</FormControl>
 
@@ -233,17 +255,21 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 				<FormField
 					control={form.control}
 					name='phone'
-					render={({ field }) => (
-						<FormItem className='sm:w-1/2'>
-							<FormLabel className='text-xs'>Phone (optional)</FormLabel>
+					render={({ field }) => {
+						console.log(field.value);
 
-							<FormControl>
-								<Input placeholder='Phone' {...field} />
-							</FormControl>
+						return (
+							<FormItem className='sm:w-1/2'>
+								<FormLabel className='text-xs'>Phone (optional)</FormLabel>
 
-							<FormMessage />
-						</FormItem>
-					)}
+								<FormControl>
+									<Input placeholder='Phone' {...field} onChange={handlePhoneChange} />
+								</FormControl>
+
+								<FormMessage />
+							</FormItem>
+						);
+					}}
 				/>
 
 				<div className='flex items-center justify-end pt-4 border-t border-solid border-bgSecondaryMedium'>

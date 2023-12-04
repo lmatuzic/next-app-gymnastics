@@ -8,7 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/app/components/shadcn/Select';
-import { programsAndCategories } from '@/app/contants/applications';
+import { programsAndCategories } from '@/app/contants/programsAndCategories';
 
 type ProgramDropdownProps = {
 	selectedProgramAndCategory: string | undefined;

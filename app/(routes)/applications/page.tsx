@@ -1,8 +1,8 @@
 import { getApplications } from '@/app/(routes)/applications/actions/getApplications';
 import { getCountries } from '@/app/(routes)/applications/actions/getCountries';
 import ApplicationDialog from '@/app/(routes)/applications/components/ApplicationDialog';
+import { ApplicationsDataTable } from '@/app/(routes)/applications/components/ApplicationsDataTable';
 import ApplyGymnastForm from '@/app/(routes)/applications/components/ApplyGymnastForm';
-import { DataTable } from '@/app/(routes)/applications/components/DataTable';
 import H1 from '@/app/components/headings/H1';
 import Badge from '@/app/components/status/Badge';
 import { GymnastApplication } from '@/app/typings/applications';
@@ -28,7 +28,7 @@ export default async function ApplicationsPage() {
 				</div>
 			</header>
 
-			<DataTable data={applications} countries={countries} />
+			<ApplicationsDataTable data={applications} countries={countries} />
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { getCombinedProgramsAndCategories } from '@/app/utils/getCombinedProgramsAndCategories';
+import { getProgramsAndCategories } from '@/app/utils/getProgramsAndCategories';
 
 export const programs = [{ name: 'Univerzalni program' }, { name: 'Obavezni program' }];
 
@@ -9,4 +9,4 @@ export const categories = [
 	{ name: 'Stariji dječaci' },
 ];
 
-export const programsAndCategories = getCombinedProgramsAndCategories();
+export const programsAndCategories = getProgramsAndCategories();
