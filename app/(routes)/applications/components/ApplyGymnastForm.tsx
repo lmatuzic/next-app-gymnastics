@@ -256,8 +256,6 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 					control={form.control}
 					name='phone'
 					render={({ field }) => {
-						console.log(field.value);
-
 						return (
 							<FormItem className='sm:w-1/2'>
 								<FormLabel className='text-xs'>Phone (optional)</FormLabel>

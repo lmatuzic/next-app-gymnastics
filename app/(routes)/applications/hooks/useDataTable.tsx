@@ -41,7 +41,7 @@ export default function useDataTable({
 	const dataTableColumns: ColumnDef<GymnastApplication>[] = useMemo(() => {
 		return [
 			{
-				accessorKey: 'name',
+				accessorKey: 'firstName',
 				header: 'Name',
 				cell: ({ row }) => (
 					<>
@@ -63,14 +63,17 @@ export default function useDataTable({
 			{
 				accessorKey: 'discipline',
 				header: 'Discipline',
+				cell: ({ row }) => {
+					return <span>{row.getValue('discipline')}</span>;
+				},
 			},
 			{
-				accessorKey: 'program',
+				accessorKey: 'programName',
 				header: 'Program',
 				cell: ({ row }) => {
 					return (
 						<>
-							<span>{row.original.programName}</span>
+							<span>{row.getValue('programName')}</span>
 						</>
 					);
 				},
@@ -88,7 +91,7 @@ export default function useDataTable({
 			{
 				accessorKey: 'status',
 				header: 'Status',
-				cell: ({ row }) => <StatusIndicator text={row.original.status} />,
+				cell: ({ row }) => <StatusIndicator text={row.getValue('status')} />,
 			},
 			{
 				accessorKey: 'date',
