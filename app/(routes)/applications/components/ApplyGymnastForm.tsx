@@ -4,6 +4,7 @@ import { submitApplication } from '@/app/(routes)/applications/actions/submitApp
 import { DatePicker } from '@/app/components/dates/DatePicker';
 import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
 import ProgramDropdown from '@/app/components/dropdowns/ProgramDropdown';
+import LoadingSpinner from '@/app/components/loading/LoadingSpinner';
 import { Button } from '@/app/components/shadcn/Button';
 import { DialogClose } from '@/app/components/shadcn/Dialog';
 import {
@@ -40,12 +41,13 @@ type FormKey =
 export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 	const [selectedCountryName, setSelectedCountryName] = useState('');
 	const [selectedCountryPhoneCode, setSelectedCountryPhoneCode] = useState<string>();
+	const [isApplicationSubmitting, setIsApplicationSubmitting] = useState(false);
 
 	const { toast } = useToast();
 
 	const form = useForm<z.infer<typeof applicationSchema>>({
 		resolver: zodResolver(applicationSchema),
-		reValidateMode: 'onBlur',
+		reValidateMode: 'onChange',
 		defaultValues: {
 			firstName: '',
 			lastName: '',
@@ -73,7 +75,6 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 
 	const handlePhoneChange = (e: any) => {
 		const formattedCountryPhoneCode = `+${selectedCountryPhoneCode} `;
-
 		const inputValue = e.target.value;
 
 		if (!inputValue.startsWith(formattedCountryPhoneCode)) {
@@ -89,6 +90,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 
 	const onSubmit = async (values: z.infer<typeof applicationSchema>) => {
 		try {
+			setIsApplicationSubmitting(true);
 			const response = await submitApplication(values);
 
 			if (response.ok) {
@@ -110,6 +112,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 			console.error('Error:', error);
 		} finally {
 			closeApplicationDialog();
+			setIsApplicationSubmitting(false);
 		}
 	};
 
@@ -272,12 +275,19 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
 
 				<div className='flex items-center justify-end pt-4 border-t border-solid border-bgSecondaryMedium'>
 					<DialogClose asChild>
-						<Button variant='link' className='font-normal text-black'>
+						<Button
+							variant='link'
+							className='font-normal text-black'
+							disabled={isApplicationSubmitting}
+						>
 							Cancel
 						</Button>
 					</DialogClose>
 
-					<Button type='submit'>Save</Button>
+					<Button type='submit' disabled={isApplicationSubmitting}>
+						Save
+						{isApplicationSubmitting ? <LoadingSpinner /> : null}
+					</Button>
 				</div>
 			</form>
 		</Form>
