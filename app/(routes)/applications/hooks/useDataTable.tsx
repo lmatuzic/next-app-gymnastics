@@ -168,7 +168,7 @@ export default function useDataTable({
 				},
 			},
 		];
-	}, []);
+	}, [countries, handleToggleRowExpansion]);
 
 	return { dataTableColumns, renderSubComponent };
 }
