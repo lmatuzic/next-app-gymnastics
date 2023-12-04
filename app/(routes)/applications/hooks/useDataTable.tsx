@@ -70,6 +70,7 @@ export default function useDataTable({
 						<Button
 							variant='ghost'
 							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+							className='p-0'
 						>
 							Discipline
 							<ArrowUpDown className='w-4 h-4 ml-2' />
@@ -87,6 +88,7 @@ export default function useDataTable({
 						<Button
 							variant='ghost'
 							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+							className='p-0'
 						>
 							Program
 							<ArrowUpDown className='w-4 h-4 ml-2' />
@@ -108,6 +110,7 @@ export default function useDataTable({
 						<Button
 							variant='ghost'
 							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+							className='p-0'
 						>
 							Category
 							<ArrowUpDown className='w-4 h-4 ml-2' />
@@ -123,6 +126,7 @@ export default function useDataTable({
 						<Button
 							variant='ghost'
 							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+							className='p-0'
 						>
 							Team
 							<ArrowUpDown className='w-4 h-4 ml-2' />
@@ -138,6 +142,7 @@ export default function useDataTable({
 						<Button
 							variant='ghost'
 							onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+							className='p-0'
 						>
 							Status
 							<ArrowUpDown className='w-4 h-4 ml-2' />
