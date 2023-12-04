@@ -1,30 +1,11 @@
+import { getApplications } from '@/app/(routes)/applications/actions/getApplications';
+import { getCountries } from '@/app/(routes)/applications/actions/getCountries';
 import ApplicationDialog from '@/app/(routes)/applications/components/ApplicationDialog';
 import ApplyGymnastForm from '@/app/(routes)/applications/components/ApplyGymnastForm';
 import { DataTable } from '@/app/(routes)/applications/components/DataTable';
 import H1 from '@/app/components/headings/H1';
 import Badge from '@/app/components/status/Badge';
-import { APPLICATIONS, COUNTRIES } from '@/app/contants/endpoints';
 import { GymnastApplication } from '@/app/typings/applications';
-
-async function getCountries() {
-	const res = await fetch(COUNTRIES);
-
-	if (!res.ok) {
-		throw new Error('Failed to fetch countries data');
-	}
-
-	return res.json();
-}
-
-async function getApplications() {
-	const res = await fetch(APPLICATIONS);
-
-	if (!res.ok) {
-		throw new Error('Failed to fetch applications data');
-	}
-
-	return res.json();
-}
 
 export default async function ApplicationsPage() {
 	const countries = await getCountries();

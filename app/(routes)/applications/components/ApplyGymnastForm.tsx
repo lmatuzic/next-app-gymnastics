@@ -1,5 +1,6 @@
 'use client';
 
+import { submitApplication } from '@/app/(routes)/applications/actions/submitApplication';
 import { DatePicker } from '@/app/components/dates/DatePicker';
 import { CountryDropdown } from '@/app/components/dropdowns/CountryDropdown';
 import ProgramDropdown from '@/app/components/dropdowns/ProgramDropdown';
@@ -14,15 +15,15 @@ import {
 	FormMessage,
 } from '@/app/components/shadcn/Form';
 import { Input } from '@/app/components/shadcn/Input';
-import { APPLICATION } from '@/app/contants/endpoints';
 import { useToast } from '@/app/hooks/useToast';
 import { Country } from '@/app/typings/countries';
 import { applicationSchema } from '@/lib/zod/schemas/applyGymnastSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useFormStatus } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-type ApplyGymnastForm = {
+type ApplyGymnastFormProps = {
 	countries: Country[];
 };
 
@@ -36,7 +37,8 @@ type FormKey =
 	| 'team'
 	| 'phone';
 
-export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
+export default function ApplyGymnastForm({ countries }: ApplyGymnastFormProps) {
+	const { pending } = useFormStatus();
 	const { toast } = useToast();
 
 	const form = useForm<z.infer<typeof applicationSchema>>({
@@ -70,13 +72,7 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 
 	const onSubmit = async (values: z.infer<typeof applicationSchema>) => {
 		try {
-			const response = await fetch(APPLICATION, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(values),
-			});
+			const response = await submitApplication(values);
 
 			if (response.ok) {
 				toast({
@@ -89,6 +85,10 @@ export default function ApplyGymnastForm({ countries }: ApplyGymnastForm) {
 				});
 			}
 		} catch (error) {
+			toast({
+				title: `${error}`,
+				variant: 'destructive',
+			});
 			console.error('Error:', error);
 		} finally {
 			closeApplicationDialog();
