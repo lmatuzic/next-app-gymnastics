@@ -36,7 +36,6 @@ export function ApplicationsDataTable({ data, countries }: DataTableProps) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
-	const [rotateArrowClass, setRotateArrowClass] = useState('');
 
 	const handleToggleRowExpansion = (row: Row<GymnastApplication>) => {
 		setExpandedRowId((prevRowId) => {
