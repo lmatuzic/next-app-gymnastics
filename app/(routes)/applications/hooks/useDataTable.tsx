@@ -11,16 +11,12 @@ import { useCallback, useMemo } from 'react';
 
 interface UseDataTableProps {
 	countries: Country[];
-	expandedRowId: string | null;
 	handleToggleRowExpansion: (row: Row<GymnastApplication>) => void;
-	rotateArrowClass: string;
 }
 
 export default function useDataTable({
 	countries,
-	expandedRowId,
 	handleToggleRowExpansion,
-	rotateArrowClass,
 }: UseDataTableProps) {
 	const renderSubComponent = useCallback((row: Row<GymnastApplication>) => {
 		const date = new Date(row.original.dateOfBirth);
@@ -173,7 +169,7 @@ export default function useDataTable({
 				},
 			},
 		];
-	}, [countries, handleToggleRowExpansion]);
+	}, []);
 
 	return { dataTableColumns, renderSubComponent };
 }

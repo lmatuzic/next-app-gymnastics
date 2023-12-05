@@ -50,9 +50,7 @@ export function ApplicationsDataTable({ data, countries }: DataTableProps) {
 
 	const { dataTableColumns, renderSubComponent } = useDataTable({
 		countries,
-		expandedRowId,
 		handleToggleRowExpansion,
-		rotateArrowClass,
 	});
 
 	const table = useReactTable({
